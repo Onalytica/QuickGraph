@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>Onalytica.QuickGraph</id>
+        <version>3.7.3</version>
+        <title>Onalytica.QuickGraph</title>
+        <authors>Jonathan \"Peli\" de Halleux</authors>
+        <projectUrl>https://github.com/Onalytica/QuickGraph</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Repackaged YC.QuickGraph with few performance improvements.</description>
+        <summary>Graph datastructures and algorithms for .NET.</summary>
+        <releaseNotes>Minor fix in packet dependences specification</releaseNotes>
+        <copyright>Copyright 2016</copyright>
+        <tags>graph datastructures algorithms QuickGraph Graphviz .NET CSharp</tags>
+        <dependencies>
+            <dependency id="DotNet.Contracts" version="1.10.20606.1" />
+            <dependency id="DotParser" version="1.0.6" />
+            <dependency id="FSharp.Core" />
+        </dependencies>
+        <references>
+            <reference file="YC.QuickGraph.dll" />
+            <reference file="YC.QuickGraph.FSA.dll" />
+            <reference file="YC.QuickGraph.FST.dll" />
+            <reference file="YC.QuickGraph.Data.dll" />
+            <reference file="YC.QuickGraph.Glee.dll" />
+            <reference file="YC.QuickGraph.Graphviz.dll" />
+            <reference file="YC.QuickGraph.Petri.dll" />
+            <reference file="YC.QuickGraphFS.dll" />
+        </references>
+    </metadata>
+    <files>
+        <file src="src\QuickGraph.Data\bin\Release\YC.QuickGraph.Data.dll" target="lib\net45\YC.QuickGraph.Data.dll" />
+        <file src="src\QuickGraph\bin\Release\YC.QuickGraph.dll" target="lib\net45\YC.QuickGraph.dll" />
+        <file src="src\QuickGraph.FSA\bin\Release\YC.QuickGraph.FSA.dll" target="lib\net45\YC.QuickGraph.FSA.dll" />
+        <file src="src\QuickGraph.FST\bin\Release\YC.QuickGraph.FST.dll" target="lib\net45\YC.QuickGraph.FST.dll" />
+        <file src="src\QuickGraph.Glee\bin\Release\YC.QuickGraph.Glee.dll" target="lib\net45\YC.QuickGraph.Glee.dll" />
+        <file src="src\QuickGraph.Graphviz\bin\Release\YC.QuickGraph.Graphviz.dll" target="lib\net45\YC.QuickGraph.Graphviz.dll" />
+        <file src="src\QuickGraph.Petri\bin\Release\YC.QuickGraph.Petri.dll" target="lib\net45\YC.QuickGraph.Petri.dll" />
+        <file src="src\QuickGraph\bin\Release\YC.QuickGraph.xml" target="lib\net45\YC.QuickGraph.xml" />
+        <file src="src\QuickGraphFS\bin\Release\YC.QuickGraphFS.dll" target="lib\net45\YC.QuickGraphFS.dll" />
+    </files>
+</package>
