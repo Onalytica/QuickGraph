@@ -124,14 +124,11 @@ namespace QuickGraph.Algorithms.Ranking
             double error = 0;
             do
             {
-                if (cancelManager.IsCancelling)
-                    return;
-
                 // compute page ranks
                 error = 0;
                 var ranksArr = this.Ranks.ToArray();
                 var ranksArrInx = ranksArr.Count() - 1;
-                while (ranksArrInx > -1 && !cancelManager.IsCancelling)
+                while (ranksArrInx > -1)
                 {
                     var de = ranksArr[ranksArrInx--];
 
@@ -160,7 +157,7 @@ namespace QuickGraph.Algorithms.Ranking
 
                 iter++;
             }
-            while (error > this.tolerance && iter < this.maxIterations);
+            while (error > this.tolerance && iter < this.maxIterations && !cancelManager.IsCancelling);
 
             Console.WriteLine("{0}, {1}", iter, error);
         }

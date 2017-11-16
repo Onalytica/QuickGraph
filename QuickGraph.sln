@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProjectScaffold", "ProjectScaffold", "{FAAD5B1C-1217-48D6-B1EF-7CAC0440D6A4}"
 	ProjectSection(SolutionItems) = preProject
@@ -49,6 +49,11 @@ EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "QuickGraph.FST.Tests", "tests\QuickGraph.FST.Tests\QuickGraph.FST.Tests.fsproj", "{6B141FDE-F5DF-4DFD-B21F-C076BC87CCAF}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "QuickGraph.FST", "src\QuickGraph.FST\QuickGraph.FST.fsproj", "{4B220E23-A7E0-4222-83F5-C785F7C66B33}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CBEEB69C-45B7-4EBC-A32C-4CBD60DD25EE}"
+	ProjectSection(SolutionItems) = preProject
+		Onalytica.QuickGraph.nuspec = Onalytica.QuickGraph.nuspec
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -207,6 +212,9 @@ Global
 		{3BF3542B-4034-429F-9105-197A60625CA3} = {22937B93-4129-4F68-AB14-F7AFE020BA8F}
 		{6B141FDE-F5DF-4DFD-B21F-C076BC87CCAF} = {22937B93-4129-4F68-AB14-F7AFE020BA8F}
 		{4B220E23-A7E0-4222-83F5-C785F7C66B33} = {2E664E5C-14E3-4AA2-A336-7209544C78F0}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {83E1A353-FA02-4CCA-B9E2-7DA90EB6F3D4}
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = QuickGraph1.vsmdi
