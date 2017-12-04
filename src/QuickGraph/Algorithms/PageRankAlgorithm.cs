@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using QuickGraph.Predicates;
 using QuickGraph.Collections;
 
@@ -109,12 +111,12 @@ namespace QuickGraph.Algorithms.Ranking
         protected override void InternalCompute()
         {
             var cancelManager = this.Services.CancelManager;
-            IDictionary<TVertex, double> tempRanks = new Dictionary<TVertex, double>();
+            IDictionary<TVertex, double> tempRanks = new Dictionary<TVertex, double>(ranks);
 
             // create filtered graph
             var fg = new FilteredBidirectionalGraph<TVertex, TEdge, IBidirectionalGraph<TVertex, TEdge>>(
                 this.VisitedGraph,
-                new InDictionaryVertexPredicate<TVertex, double>(this.ranks).Test,
+                new InDictionaryVertexPredicate<TVertex, double>(ranks).Test,
                 e => true
             );
             var inEdges = fg.Vertices.ToDictionary(v => v, v => fg.InEdges(v).ToArray());
@@ -126,12 +128,8 @@ namespace QuickGraph.Algorithms.Ranking
             {
                 // compute page ranks
                 error = 0;
-                var ranksArr = this.Ranks.ToArray();
-                var ranksArrInx = ranksArr.Count() - 1;
-                while (ranksArrInx > -1)
+                Parallel.ForEach(tempRanks.ToArray(), de =>
                 {
-                    var de = ranksArr[ranksArrInx--];
-
                     // compute ARi
                     double r = 0;
                     var edges = inEdges[de.Key];
@@ -139,7 +137,7 @@ namespace QuickGraph.Algorithms.Ranking
                     while (edgesInx > -1)
                     {
                         var e = edges[edgesInx--];
-                        r += this.ranks[e.Source] / outDegrees[e.Source];
+                        r += tempRanks[e.Source] / outDegrees[e.Source];
                     }
 
                     // add sourceRank and store
@@ -147,19 +145,27 @@ namespace QuickGraph.Algorithms.Ranking
                     tempRanks[de.Key] = newRank;
 
                     // compute deviation
-                    error += Math.Abs(de.Value - newRank);
-                }
-
-                // swap ranks
-                var temp = ranks;
-                ranks = tempRanks;
-                tempRanks = temp;
+                    InterlockedAdd(ref error, Math.Abs(de.Value - newRank));
+                });
 
                 iter++;
             }
             while (error > this.tolerance && iter < this.maxIterations && !cancelManager.IsCancelling);
 
-            Console.WriteLine("{0}, {1}", iter, error);
+            ranks = tempRanks;
+        }
+
+        private double InterlockedAdd(ref double location1, double value)
+        {
+            double newCurrentValue = location1; // non-volatile read, so may be stale
+            while (true)
+            {
+                double currentValue = newCurrentValue;
+                double newValue = currentValue + value;
+                newCurrentValue = Interlocked.CompareExchange(ref location1, newValue, currentValue);
+                if (newCurrentValue == currentValue)
+                    return newValue;
+            }
         }
 
         public double GetRanksSum()
