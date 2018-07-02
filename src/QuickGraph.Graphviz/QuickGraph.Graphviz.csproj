@@ -216,6 +216,7 @@
     <Compile Include="SvgHtmlWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="quickgraph.snk" />
   </ItemGroup>
   <ItemGroup>
